@@ -13,5 +13,11 @@ public interface UserMapper {
 
     UserRole findUserByQQ(String qq);
 
+    UserRole findUserByEmail(String email);
+
+    UserRole findUserByPhone(String phone);
+
     void createUser(UserRole role);
+
+    void updateUser(UserRole role);
 }

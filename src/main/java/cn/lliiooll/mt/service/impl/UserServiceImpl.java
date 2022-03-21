@@ -31,7 +31,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserRole findUserByEmail(String email) {
+        return mapper.findUserByEmail(email);
+    }
+
+    @Override
+    public UserRole findUserByPhone(String phone) {
+        return mapper.findUserByPhone(phone);
+    }
+
+    @Override
     public void createUser(UserRole role) {
         mapper.createUser(role);
+    }
+
+    @Override
+    public void updateUser(UserRole role) {
+        mapper.updateUser(role);
     }
 }

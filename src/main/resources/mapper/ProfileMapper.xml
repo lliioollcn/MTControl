@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lliiooll.mt.mapper.ProfileMapper">
+
+
+    <select id="findProfileByUid" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.uid = #{value}
+    </select>
+
+    <select id="findProfileByName" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.name = #{value}
+    </select>
+
+    <select id="findProfileByUUID" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.uuid = #{value}
+    </select>
+    <select id="findProfileByAccessToken" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.accessToken = #{value}
+    </select>
+    <select id="findProfileByClientToken" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.clientToken = #{value}
+    </select>
+    <select id="findProfileByServerId" parameterType="String" resultType="cn.lliiooll.mt.pojo.Profile">
+        SELECT a.* FROM user_profile a WHERE a.serverId = #{value}
+    </select>
+
+    <insert id="createProfile" parameterType="cn.lliiooll.mt.pojo.Profile" useGeneratedKeys="true">
+        INSERT user_profile (name,uid,uuid,accessToken,clientToken,serverId) VALUES
+        (#{name},#{uid},#{uuid},#{accessToken},#{clientToken},#{serverId})
+    </insert>
+
+    <update id="updateProfile" parameterType="cn.lliiooll.mt.pojo.Profile" useGeneratedKeys="true">
+        UPDATE user_role SET
+        name=#{name},uid=#{uid},uuid=#{uuid},accessToken=#{accessToken},clientToken=#{clientToken},serverId=#{serverId}
+        WHERE name=#{name} AND
+        uid=#{uid} AND uuid=#{uuid}
+    </update>
+</mapper>

@@ -31,6 +31,7 @@ public class MTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/register").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/yggdrasil/**").permitAll()
                 .and()
                 .formLogin().permitAll()
                 .loginProcessingUrl("/auth/login")

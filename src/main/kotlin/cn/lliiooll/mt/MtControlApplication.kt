@@ -9,5 +9,5 @@ import org.springframework.boot.runApplication
 class MtControlApplication
 
 fun main(args: Array<String>) {
-	runApplication<MtControlApplication>(*args)
+    runApplication<MtControlApplication>(*args)
 }

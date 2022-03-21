@@ -21,4 +21,5 @@ public class User {
     public String lastip;
     public String lasttime;
     public String qq;
+    public String phone;
 }
