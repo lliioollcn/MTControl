@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lliiooll.mt.mapper.UserMapper">
+
+    <select id="findUserByUid" parameterType="String" resultType="cn.lliiooll.mt.pojo.UserRole">
+        SELECT a.*, d.password, c.role, c.perms FROM user_data a, user_role c, user_auth d WHERE a.uid = #{value}
+        AND a.uid = c.uid AND a.uid = d.uid AND a.username = d.username LIMIT 1
+    </select>
+
+    <select id="findUserByName" parameterType="String" resultType="cn.lliiooll.mt.pojo.UserRole">
+        SELECT a.*, d.password, c.role, c.perms FROM user_data a, user_role c, user_auth d WHERE a.username = #{value}
+        AND a.username = c.username AND a.username = d.username AND a.username = d.username
+        LIMIT 1
+    </select>
+    <select id="findUserByQQ" parameterType="String" resultType="cn.lliiooll.mt.pojo.UserRole">
+        SELECT a.*, d.password, c.role, c.perms FROM user_data a, user_role c, user_auth d
+        WHERE a.qq = #{value} AND a.username = d.username
+        AND LIMIT 1
+    </select>
+
+    <insert id="createUser" parameterType="cn.lliiooll.mt.pojo.UserRole" useGeneratedKeys="true">
+        INSERT user_auth (username,uid,password) VALUES (#{username},#{uid},#{password});
+        INSERT user_data (username,uid,banned,email,lastip,lasttime,qq) VALUES
+        (#{username},#{uid},#{banned},#{email},#{lastip},#{lasttime},#{qq});
+        INSERT user_role (username,uid,role,perms) VALUES (#{username},#{uid},#{role},#{perms});
+    </insert>
+</mapper>

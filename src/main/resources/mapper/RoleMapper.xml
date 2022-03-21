@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lliiooll.mt.mapper.RoleMapper">
+
+    <select id="findRoleByRoleId" parameterType="Integer" resultType="cn.lliiooll.mt.pojo.Role">
+        SELECT b.* FROM sys_role b WHERE b.roleid = #{value} LIMIT 1
+    </select>
+
+    <select id="findRoleByRole" parameterType="String" resultType="cn.lliiooll.mt.pojo.Role">
+        SELECT b.* FROM sys_role b WHERE b.role = #{value} LIMIT 1
+    </select>
+
+    <insert id="createRole" parameterType="cn.lliiooll.mt.pojo.Role" useGeneratedKeys="true">
+        INSERT sys_role (roleid,role) VALUES (#{roleid},#{role});
+    </insert>
+</mapper>
