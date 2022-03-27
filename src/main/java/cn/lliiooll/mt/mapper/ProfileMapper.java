@@ -12,11 +12,11 @@ public interface ProfileMapper {
 
     List<Profile> findProfileByUid(String uid);
 
-    List<Profile> findProfileByName(String name);
+    Profile findProfileByName(String name);
 
-    List<Profile> findProfileByUUID(String uuid);
+    Profile findProfileByUUID(String uuid);
 
-    List<Profile> findProfileByAccessToken(String accessToken);
+    Profile findProfileByAccessToken(String accessToken);
 
     List<Profile> findProfileByClientToken(String clientToken);
 

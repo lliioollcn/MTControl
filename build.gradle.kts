@@ -38,6 +38,8 @@ dependencies {
 	implementation("org.springframework.session:spring-session-data-redis")
 	implementation("org.springframework.session:spring-session-jdbc")
 	implementation("com.alibaba:druid:1.1.0")
+	implementation("org.bouncycastle:bcprov-jdk15on:1.51")
+
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("mysql:mysql-connector-java")
 	annotationProcessor("org.projectlombok:lombok")

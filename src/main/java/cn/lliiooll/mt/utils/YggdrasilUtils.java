@@ -1,13 +1,86 @@
 package cn.lliiooll.mt.utils;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.SignAlgorithm;
+import cn.hutool.json.JSONConfig;
+import cn.hutool.json.JSONUtil;
+import cn.lliiooll.mt.beans.yggdrasil.TexturesBean;
+import lombok.SneakyThrows;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
+
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
 import java.security.MessageDigest;
+import java.util.UUID;
 
 public class YggdrasilUtils {
 
+    public static final String URL = "http://localhost:8080";
     public static String publicKey = "";
     public static String privateKey = "";
+    public static KeyPair pair = null;
+
+    @SneakyThrows
+    public static void init() {
+        KeyPair pair = SecureUtil.generateKeyPair("RSA", 4096);
+        YggdrasilUtils.pair = pair;
+        ByteArrayOutputStream pubOut = new ByteArrayOutputStream();
+        ByteArrayOutputStream priOut = new ByteArrayOutputStream();
+        PemObject pubObj = new PemObject("PUBLIC KEY", pair.getPublic().getEncoded());
+        PemObject priObj = new PemObject("PRIVATE KEY", pair.getPrivate().getEncoded());
+        PemWriter pubW = new PemWriter(new OutputStreamWriter(pubOut));
+        PemWriter priW = new PemWriter(new OutputStreamWriter(priOut));
+        pubW.writeObject(pubObj);
+        priW.writeObject(priObj);
+        pubW.close();
+        priW.close();
+        publicKey = pubOut.toString();
+        privateKey = priOut.toString();
+        /*
+        System.out.println("===========================================");
+        System.out.println("pub: " + Arrays.toString(pubOut.toByteArray()));
+        System.out.println("pri: " + Arrays.toString(priOut.toByteArray()));
+        System.out.println("===========================================");
+        System.out.println("pubEncoded: " + Arrays.toString(pair.getPublic().getEncoded()));
+        System.out.println("priEncoded: " + Arrays.toString(pair.getPrivate().getEncoded()));
+        System.out.println("===========================================");
+        System.out.println("pubBase64: " + Base64.encode(pair.getPublic().getEncoded()));
+        System.out.println("priBase64: " + Base64.encode(pair.getPrivate().getEncoded()));
+        System.out.println("===========================================");
+        System.out.println("");
+        System.out.println(publicKey);
+        System.out.println("");
+        System.out.println("===========================================");
+        System.out.println("");
+        System.out.println(privateKey);
+        System.out.println("");
+         */
+    }
+
+    public static String genAccessToken(String username, String clientToken) {
+        return SecureUtil.sha1(username + RandomUtil.randomString(5) + clientToken);
+    }
+
+    public static String genUuid(String username) {
+        return UUID.nameUUIDFromBytes(("MTPlayers(" + username + ")@" + username).getBytes(StandardCharsets.UTF_8)).toString().replaceAll("-", "");
+    }
+
+    public static String genClientToken() {
+        return SecureUtil.sha1(RandomUtil.randomString(10));
+    }
+
+    public static String sign(Object obj) {
+        return Base64.encode(SecureUtil
+                .sign(SignAlgorithm.SHA1withRSA, pair.getPrivate().getEncoded(), null)
+                .sign(JSONUtil.toJsonStr(obj)));
+    }
 
     public enum TexturesType {
         SKIN

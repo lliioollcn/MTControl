@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lliiooll.mt.mapper.TexturesMapper">
+
+
+    <select id="findTexturesByUid" parameterType="String" resultType="cn.lliiooll.mt.pojo.ProfileTextures">
+        SELECT a.* FROM user_textures a WHERE a.uid = #{value}
+    </select>
+
+    <select id="findTexturesByUuid" parameterType="String" resultType="cn.lliiooll.mt.pojo.ProfileTextures">
+        SELECT a.* FROM user_textures a WHERE a.uuid = #{value}
+    </select>
+    <insert id="createTextures" parameterType="cn.lliiooll.mt.pojo.ProfileTextures" useGeneratedKeys="true">
+        INSERT user_textures (timestamp,uid,uuid,skinUrl) VALUES
+        (#{timestamp},#{uid},#{uuid},#{skinUrl})
+    </insert>
+
+    <update id="updateTextures" parameterType="cn.lliiooll.mt.pojo.ProfileTextures" useGeneratedKeys="true">
+        UPDATE user_textures SET
+        timestamp=#{timestamp},
+        uid=#{uid},
+        uuid=#{uuid},
+        skinUrl=#{skinUrl}
+        WHERE name=#{name} AND
+        uid=#{uid} AND uuid=#{uuid}
+    </update>
+</mapper>

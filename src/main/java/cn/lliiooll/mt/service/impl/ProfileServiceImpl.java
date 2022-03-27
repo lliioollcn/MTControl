@@ -23,17 +23,17 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public List<Profile> findProfileByName(String name) {
+    public Profile findProfileByName(String name) {
         return mapper.findProfileByName(name);
     }
 
     @Override
-    public List<Profile> findProfileByUUID(String uuid) {
+    public Profile findProfileByUUID(String uuid) {
         return mapper.findProfileByUUID(uuid);
     }
 
     @Override
-    public List<Profile> findProfileByAccessToken(String accessToken) {
+    public Profile findProfileByAccessToken(String accessToken) {
         return mapper.findProfileByAccessToken(accessToken);
     }
 

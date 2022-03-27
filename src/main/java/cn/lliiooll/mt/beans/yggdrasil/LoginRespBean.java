@@ -18,5 +18,5 @@ public class LoginRespBean extends BaseYggBean {
     private String clientToken;
     private ProfileInfoBean[] availableProfiles;
     private ProfileInfoBean selectedProfile;
-    private UserInfoBean[] user;
+    private UserInfoBean user;
 }

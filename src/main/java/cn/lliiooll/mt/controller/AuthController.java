@@ -42,8 +42,8 @@ public class AuthController {
         }
         role = Utils.createUserData(userName, passEncoder.encode(passWord.trim()), qq);
         userService.createUser(role);
-        //role.setPassword("");
-        //role.setLastip("");
+        role.setPassword("");
+        role.setLastip("");
         return RespUtils.success("注册成功！", role);
     }
 

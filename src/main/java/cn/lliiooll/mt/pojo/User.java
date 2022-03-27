@@ -19,7 +19,7 @@ public class User {
     public String uid;
     public String email;
     public String lastip;
-    public String lasttime;
+    public long lasttime;
     public String qq;
     public String phone;
 }
