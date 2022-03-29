@@ -79,7 +79,7 @@ public class YggdrasilUtils {
     public static String sign(Object obj) {
         return Base64.encode(SecureUtil
                 .sign(SignAlgorithm.SHA1withRSA, pair.getPrivate().getEncoded(), null)
-                .sign(JSONUtil.toJsonStr(obj)));
+                .sign(obj.toString());
     }
 
     public enum TexturesType {
