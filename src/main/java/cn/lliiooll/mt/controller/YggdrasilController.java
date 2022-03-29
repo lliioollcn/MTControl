@@ -288,7 +288,7 @@ public class YggdrasilController {
                                 add(ProfileInfoBean.ProfileProperties.builder()
                                         .name("textures")
                                         .value(Base64.encode(JSONUtil.toJsonStr(texture), StandardCharsets.UTF_8))
-                                        .signature(YggdrasilUtils.sign(texture))
+                                        .signature(YggdrasilUtils.sign(Base64.encode(JSONUtil.toJsonStr(texture), StandardCharsets.UTF_8)))
                                         .build());
                             }}.toArray(new ProfileInfoBean.ProfileProperties[0]))
                             .build();
